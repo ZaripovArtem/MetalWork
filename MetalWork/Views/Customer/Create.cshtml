@@ -1,0 +1,42 @@
+﻿@*
+    For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
+*@
+@{
+}
+
+@model MetalWork.Models.Customer
+
+<h2>Добавить клиента</h2>
+
+@using (Html.BeginForm())
+{
+        @Html.TextBoxFor(m => m.Surname, new { @class = "form-main",  @placeholder = "Фамилия"})
+        <br />
+        @Html.TextBoxFor(m => m.Name, new { @class = "form-main", @placeholder = "Имя" })
+        <br />
+        @Html.TextBoxFor(m => m.Patronomic, new { @class = "form-main", @placeholder = "Отчество" })
+        <br />
+        @Html.TextBoxFor(m => m.Address, new { @class = "form-main", @placeholder = "Адрес" })
+        <br />
+        @Html.TextBoxFor(m => m.Email, new { @class = "form-main", @placeholder = "Email" })
+        <br />
+        <div class="main-footer">
+            <input type="submit" class="submit-buttom" value="Добавить" />
+            @Html.ActionLink("Отменить", "Index")
+        </div>
+}
+
+
+<style>
+    .form-main{
+        margin-top: 10px;
+        width: 300px;
+        height: 40px;
+    }
+    .main-footer{
+        margin-top: 10px;
+    }
+    .submit-buttom{
+        margin-right: 135px;
+    }
+</style>

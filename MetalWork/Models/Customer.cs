@@ -11,7 +11,7 @@ namespace MetalWork.Models
         public string Name { get; set; } // имя клиента
         public string Surname { get; set; } // фамилия клиента
         public string Patronomic { get; set; } // отчество клиента
-        public string Address { get; set; } // адресс клиента
+        public string Address { get; set; } // адрес клиента
         public string Email { get; set; } // email клиента
         public ICollection<Sell> Sells { get; set; }
         public Customer()
