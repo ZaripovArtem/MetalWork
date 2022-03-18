@@ -1,0 +1,31 @@
+﻿@model MetalWork.Models.Product
+
+<h2>Изменение информации о клиенте</h2>
+
+@using (Html.BeginForm())
+{
+    @Html.TextBoxFor(m => m.Name, new { @class = "form-main", @placeholder = "Фамилия" })
+    <br />
+    @Html.TextBoxFor(m => m.Price, new { @class = "form-main", @placeholder = "Имя" })
+    <br />
+    <div class="main-footer">
+        <input type="submit" class="submit-buttom" value="Изменить" />
+        @Html.ActionLink("Отменить", "Index")
+    </div>
+}
+
+<style>
+    .form-main {
+        margin-top: 10px;
+        width: 300px;
+        height: 40px;
+    }
+
+    .main-footer {
+        margin-top: 10px;
+    }
+
+    .submit-buttom {
+        margin-right: 135px;
+    }
+</style>

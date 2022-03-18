@@ -1,0 +1,61 @@
+﻿@model IEnumerable<MetalWork.Models.Sell>
+@{
+    ViewBag.Title = "Каталог игроков";
+}
+
+<h2>Каталог продажи товара</h2>
+<p>
+    @Html.ActionLink("Добавить продажу", "Create")
+</p>
+<table>
+    <tr>
+        <th>Id</th>
+        <th>Фамилия</th>
+        <th>Имя</th>
+        <th>Отчество</th>
+        <th>Товар</th>
+        <th>Цена за ед.</th>
+        <th>Кол-во</th>
+        <th>Итоговая цена</th>
+        <th>Дата</th>
+    </tr>
+
+    @foreach (var item in Model)
+    {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.Customer.Id)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Customer.Surname)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Customer.Name)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Customer.Patronomic)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Product.Name)
+            </td>
+            <td>
+                @((item.Product.Price).ToString("# ₽"))
+            </td>
+            <td>
+                @(item.Count)
+            </td>
+            <td>
+                @((item.Count * item.Product.Price).ToString("# ₽"))
+            </td>
+            
+            <td>
+                @Html.DisplayFor(modelItem => item.Date)
+            </td>
+
+            <td>
+                @Html.ActionLink("Редактировать", "Edit", new { id = item.Id }) |
+                @Html.ActionLink("Удалить", "Delete", new { id = item.Id })
+            </td>
+        </tr>
+    }
+</table>

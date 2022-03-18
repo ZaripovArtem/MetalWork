@@ -1,5 +1,6 @@
 ﻿using MetalWork.Models;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
@@ -8,30 +9,34 @@ using System.Threading.Tasks;
 
 namespace MetalWork.Controllers
 {
-    public class CustomerController : Controller
+    public class SellController : Controller
     {
         ApplicationContext db;
 
-        public CustomerController(ApplicationContext context)
+        public SellController(ApplicationContext context)
         {
             db = context;
         }
-
         public IActionResult Index()
         {
-            return View(db.Customers.ToList());
+            var sell = db.Sells.Include(p => p.Customer).Include(p => p.Product);
+            return View(sell.ToList());
         }
 
         [HttpGet]
         public IActionResult Create()
         {
+            SelectList customer = new SelectList(db.Customers, "Id", "Surname");
+            ViewBag.Customer = customer;
+            SelectList product = new SelectList(db.Products, "Id", "Name");
+            ViewBag.Product = product;
             return View();
         }
 
         [HttpPost]
-        public IActionResult Create(Customer customer)
+        public IActionResult Create(Sell sell)
         {
-            db.Customers.Add(customer);
+            db.Sells.Add(sell);
             db.SaveChanges();
             return RedirectToAction("Index");
         }
@@ -43,32 +48,32 @@ namespace MetalWork.Controllers
             {
                 return NotFound();
             }
-            Customer customer = db.Customers.Find(id);
-            if(customer != null)
+            Sell sell = db.Sells.Find(id);
+            if (sell != null)
             {
-                return View(customer);
+                return View(sell);
             }
             return RedirectToAction("Index");
         }
 
         [HttpPost]
-        public IActionResult Edit(Customer customer)
+        public IActionResult Edit(Sell sell)
         {
-            db.Entry(customer).State = EntityState.Modified;
             db.SaveChanges();
             return RedirectToAction("Index");
         }
 
         public IActionResult Delete(int? id)
         {
-            if(id == null)
+            if(id ==null)
             {
                 RedirectToAction("Index");
             }
-            Customer customer = db.Customers.Find(id);
-            db.Customers.Remove(customer);
+            Sell sell = db.Sells.Find(id);
+            db.Sells.Remove(sell);
             db.SaveChanges();
             return RedirectToAction("Index");
         }
+
     }
 }
