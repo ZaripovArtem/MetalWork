@@ -1,0 +1,18 @@
+﻿@model MetalWork.Models.Sell
+
+<h2>Изменить состав изделия</h2>
+
+@using (Html.BeginForm())
+{
+    @Html.DropDownListFor(model => model.CustomerId, ViewBag.Customer as SelectList)
+    <br />
+    @Html.DropDownListFor(model => model.ProductId, ViewBag.Product as SelectList)
+    <br />
+    @Html.TextBoxFor(m => m.Count, new { @class = "form-main", @placeholder = "Количество", @type = "number" })
+    <br />
+    <input class="form-control" asp-for="Date" asp-format="{0:yyyy-MM-ddTHH:mm}" />
+    <div class="main-footer">
+        <input type="submit" class="submit-buttom" value="Изменить" />
+        @Html.ActionLink("Отменить", "Index")
+    </div>
+}

@@ -4,9 +4,9 @@
 
 @using (Html.BeginForm())
 {
-    @Html.TextBoxFor(m => m.Name, new { @class = "form-main", @placeholder = "Фамилия" })
+    @Html.TextBoxFor(m => m.Name, new { @class = "form-main", @placeholder = "Название" })
     <br />
-    @Html.TextBoxFor(m => m.Price, new { @class = "form-main", @placeholder = "Имя" })
+    @Html.TextBoxFor(m => m.Price, new { @class = "form-main", @placeholder = "Цена" })
     <br />
     <div class="main-footer">
         <input type="submit" class="submit-buttom" value="Изменить" />

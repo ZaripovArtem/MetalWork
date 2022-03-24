@@ -1,6 +1,8 @@
 ﻿using MetalWork.Models;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -8,6 +10,7 @@ using System.Threading.Tasks;
 
 namespace MetalWork.Controllers
 {
+    [Authorize(Roles = "Admin, Supplier")]
     public class ProductController : Controller
     {
         ApplicationContext db;
@@ -39,6 +42,7 @@ namespace MetalWork.Controllers
         [HttpPost]
         public IActionResult Edit(Product product)
         {
+            db.Entry(product).State = EntityState.Modified;
             db.SaveChanges();
             return RedirectToAction("Index");
         }

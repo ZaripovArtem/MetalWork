@@ -1,0 +1,15 @@
+﻿@model MetalWork.Models.Material
+
+<h2>Изменение информации о материалах</h2>
+
+@using (Html.BeginForm())
+{
+    @Html.TextBoxFor(m => m.Name, new { @class = "form-main", @placeholder = "Название" })
+    <br />
+    @Html.TextBoxFor(m => m.Price, new { @class = "form-main", @placeholder = "Цена", @type = "number"})
+    <br />
+    <div class="main-footer">
+        <input type="submit" class="submit-buttom" value="Изменить" />
+        @Html.ActionLink("Отменить", "Index")
+    </div>
+}

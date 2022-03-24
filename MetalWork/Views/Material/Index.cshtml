@@ -1,0 +1,21 @@
+﻿@{
+    ViewBag.Title = "Материалы";
+}
+
+@Html.ActionLink("Добавить", "Create")
+
+<table>
+    <tr>
+        <th>Название материала</th>
+        <th>Цена</th>
+    </tr>
+    @foreach (var p in Model)
+    {
+        <tr>
+            <td>@p.Name</td>
+            <td>@p.Price</td>
+            <td>@Html.ActionLink("Редактировать", "Edit", new { id = p.Id })</td>
+            <td>@Html.ActionLink("Удалить", "Delete", new { id = p.Id })</td>
+        </tr>
+    }
+</table>

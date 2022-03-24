@@ -1,0 +1,17 @@
+﻿@model MetalWork.Models.ProductComposition
+
+<h2>Добавить состав изделия</h2>
+
+@using (Html.BeginForm())
+{
+    @Html.DropDownListFor(model => model.MaterialId, ViewBag.Material as SelectList)
+    <br />
+    @Html.DropDownListFor(model => model.ProductId, ViewBag.Product as SelectList)
+    <br />
+    @Html.TextBoxFor(m => m.Count, new { @class = "form-main", @placeholder = "Количество" })
+    <br />
+    <div class="main-footer">
+        <input type="submit" class="submit-buttom" value="Добавить" />
+        @Html.ActionLink("Отменить", "Index")
+    </div>
+}

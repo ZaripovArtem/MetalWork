@@ -13,6 +13,8 @@ namespace MetalWork.Models
         public DbSet<ProductComposition> ProductCompositions { get; set; }
         public DbSet<Customer> Customers { get; set; }
         public DbSet<Sell> Sells { get; set; }
+        public DbSet<User> Users { get; set; }
+        public DbSet<Role> Roles { get; set; }
         public ApplicationContext(DbContextOptions<ApplicationContext> options)
             :base(options)
         {
@@ -59,6 +61,20 @@ namespace MetalWork.Models
                 {
                     new Sell {Id = 1, Date = DateTime.Now, CustomerId = 1, ProductId = 1, Count = 10},
                     new Sell {Id = 2, Date = DateTime.Now, CustomerId = 3, ProductId = 2, Count = 2}
+                });
+
+            modelBuilder.Entity<Role>().HasData(
+                new Role[]
+                {
+                    new Role {Id = 1, Name = "Admin"},
+                    new Role {Id = 2, Name = "Supplier"}
+                });
+
+            modelBuilder.Entity<User>().HasData(
+                new User[]
+                {
+                    new User {Id = 1, Login = "admin", Password = "admin", RoleId = 1},
+                    new User {Id = 2, Login = "qwe", Password = "asd", RoleId = 2}
                 });
         }
     }

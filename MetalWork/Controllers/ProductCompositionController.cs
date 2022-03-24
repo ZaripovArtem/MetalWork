@@ -10,35 +10,34 @@ using System.Threading.Tasks;
 
 namespace MetalWork.Controllers
 {
-    [Authorize(Roles = "Admin")]
-    public class SellController : Controller
+    [Authorize(Roles = "Admin, Supplier")]
+    public class ProductCompositionController : Controller
     {
         ApplicationContext db;
-
-        public SellController(ApplicationContext context)
+        public ProductCompositionController(ApplicationContext context) 
         {
             db = context;
         }
         public IActionResult Index()
         {
-            var sell = db.Sells.Include(p => p.Customer).Include(p => p.Product);
-            return View(sell.ToList());
+            var pc = db.ProductCompositions.Include(p => p.Product).Include(p => p.Material).ToList();
+            return View(pc);
         }
 
         [HttpGet]
         public IActionResult Create()
         {
-            SelectList customer = new SelectList(db.Customers, "Id", "Surname");
-            ViewBag.Customer = customer;
             SelectList product = new SelectList(db.Products, "Id", "Name");
             ViewBag.Product = product;
+            SelectList material = new SelectList(db.Materials, "Id", "Name");
+            ViewBag.Material = material;
             return View();
         }
 
         [HttpPost]
-        public IActionResult Create(Sell sell)
+        public IActionResult Create(ProductComposition productComposition)
         {
-            db.Sells.Add(sell);
+            db.ProductCompositions.Add(productComposition);
             db.SaveChanges();
             return RedirectToAction("Index");
         }
@@ -46,41 +45,36 @@ namespace MetalWork.Controllers
         [HttpGet]
         public IActionResult Edit(int? id)
         {
-            if(id == null)
-            {
-                return NotFound();
-            }
-            Sell sell = db.Sells.Find(id);
-            if (sell != null)
+            ProductComposition productComposition = db.ProductCompositions.Find(id);
+            if(productComposition != null)
             {
                 SelectList product = new SelectList(db.Products, "Id", "Name");
                 ViewBag.Product = product;
-                SelectList customer = new SelectList(db.Customers, "Id", "Name");
-                ViewBag.Customer = customer;
-                return View(sell);
+                SelectList material = new SelectList(db.Materials, "Id", "Name");
+                ViewBag.Material = material;
+                return View(productComposition);
             }
             return RedirectToAction("Index");
         }
 
         [HttpPost]
-        public IActionResult Edit(Sell sell)
+        public IActionResult Edit(ProductComposition productComposition)
         {
-            db.Entry(sell).State = EntityState.Modified;
+            db.Entry(productComposition).State = EntityState.Modified;
             db.SaveChanges();
             return RedirectToAction("Index");
         }
 
         public IActionResult Delete(int? id)
         {
-            if(id ==null)
+            if (id == null)
             {
                 RedirectToAction("Index");
             }
-            Sell sell = db.Sells.Find(id);
-            db.Sells.Remove(sell);
+            ProductComposition productComposition = db.ProductCompositions.Find(id);
+            db.ProductCompositions.Remove(productComposition);
             db.SaveChanges();
             return RedirectToAction("Index");
         }
-
     }
 }

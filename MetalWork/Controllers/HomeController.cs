@@ -1,4 +1,5 @@
 ﻿using MetalWork.Models;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Logging;
@@ -6,10 +7,12 @@ using System;
 using System.Collections.Generic;
 using System.Diagnostics;
 using System.Linq;
+using System.Security.Claims;
 using System.Threading.Tasks;
 
 namespace MetalWork.Controllers
 {
+    [Authorize(Roles = "Admin, Supplier")]
     public class HomeController : Controller
     {
         ApplicationContext db;
@@ -21,8 +24,10 @@ namespace MetalWork.Controllers
 
         public IActionResult Index()
         {
-            var productComposition = db.ProductCompositions.Include(p => p.Product).Include(m => m.Material);
-            return View(productComposition.ToList());
+            //var productComposition = db.ProductCompositions.Include(p => p.Product).Include(m => m.Material);
+            //return View(productComposition.ToList());
+            string role = User.FindFirst(x => x.Type == ClaimsIdentity.DefaultRoleClaimType).Value;
+            return View(Content($"ваша роль: {role}"));
         }
 
         public IActionResult Privacy()
