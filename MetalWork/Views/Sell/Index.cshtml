@@ -4,11 +4,16 @@
 }
 
 <h2>Каталог продажи товара</h2>
-<p>
-    @Html.ActionLink("Добавить продажу", "Create")
-</p>
-<table>
-    <tr>
+
+
+<div class="knopka">           
+
+
+    <a class="txtdb" href="~/Customer/Create"> Добавить </a>
+
+</div>
+<table class="table table-border cell-border">
+    <tr class="rrr">
         <th>Id</th>
         <th>Фамилия</th>
         <th>Имя</th>
@@ -22,7 +27,7 @@
 
     @foreach (var item in Model)
     {
-        <tr>
+        <tr class="qtr">
             <td>
                 @Html.DisplayFor(modelItem => item.Customer.Id)
             </td>
@@ -53,9 +58,71 @@
             </td>
 
             <td>
-                @Html.ActionLink("Редактировать", "Edit", new { id = item.Id }) |
+                @Html.ActionLink("Редактировать", "Edit", new { id = item.Id }) 
                 @Html.ActionLink("Удалить", "Delete", new { id = item.Id })
             </td>
         </tr>
     }
 </table>
+<style>
+    .rrr
+    {
+        padding:10px;
+    }
+
+     .knopka
+    {
+
+        margin-bottom:20px;
+
+    }
+    .txtdb
+    {
+
+        width:200px;
+        height:100px;
+        background-color: black;
+        padding:4px;
+        font-size: 20px;
+    
+ 
+        color:white;
+        text-decoration:none;
+        border-radius:4px;
+
+   
+    }
+    .txtdb:hover{
+          text-decoration:none;
+          background-color:white;
+          color:black;
+          transition:1s;
+          border:1px solid black;
+    }
+    
+    
+th{
+    padding-right: 35px;
+     padding-left: 35px;
+}
+/* границы ячеек тела таблицы */
+td {/*
+     padding: 0px 20px 0px 20px;*/
+     padding-right: 35px;
+     padding-left: 35px;
+    
+}
+
+.table-border
+{
+
+    border: 2px solid black;
+}
+
+
+.qtr:hover
+{
+     background: #fbffd9;
+
+}
+</style>

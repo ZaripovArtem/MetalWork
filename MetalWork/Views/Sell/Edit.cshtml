@@ -4,9 +4,9 @@
 
 @using (Html.BeginForm())
 {
-    @Html.DropDownListFor(model => model.CustomerId, ViewBag.Customer as SelectList)
+    @Html.DropDownListFor(model => model.CustomerId, ViewBag.Customer as SelectList, new{@class="misha"})
     <br />
-    @Html.DropDownListFor(model => model.ProductId, ViewBag.Product as SelectList)
+    @Html.DropDownListFor(model => model.ProductId, ViewBag.Product as SelectList ,new{@class="masha"})
     <br />
     @Html.TextBoxFor(m => m.Count, new { @class = "form-main", @placeholder = "Количество", @type = "number" })
     <br />
@@ -16,3 +16,51 @@
         @Html.ActionLink("Отменить", "Index")
     </div>
 }
+
+<style>
+    .form-main
+    {
+        margin-bottom:8px;
+    }
+    .form-control
+    {
+        margin-top:8px;
+        margin-bottom:8px;
+        width:300px;
+    }
+    .misha
+    {
+        width:300px;
+        margin-bottom:8px;
+        height:40px;
+    
+    }
+    .masha
+    { height:40px;
+          width:300px;
+        margin-bottom:8px;
+        margin-top:8px;
+    }
+  .submit-buttom
+    {
+
+        width:100px;
+        height:40px;
+        background-color: black;
+        padding:4px;
+      
+    
+ 
+        color:white;
+        text-decoration:none;
+        border-radius:4px;
+
+   
+    }
+    .submit-buttom:hover{
+          text-decoration:none;
+          background-color:white;
+          color:black;
+          transition:1s;
+          border:1px solid black;
+    }</style>

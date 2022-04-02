@@ -8,26 +8,99 @@
     ViewBag.Title = "Клиенты";
 }
 
-@Html.ActionLink("Добавить", "Create")
 
-<table>
-    <tr>
+
+<div class="knopka">           
+
+
+    <a class="txtdb" href="~/Customer/Create"> Добавить </a>
+
+</div>
+  
+ 
+ 
+
+<table  class="table table-border cell-border" >
+    <tr class=wtr>
         <th>Фамилия</th>
         <th>Имя</th>
         <th>Отчество</th>
         <th>Адрес</th>
         <th>Email</th>
     </tr>
+   
     @foreach (var p in Model)
     {
-        <tr>
-            <td>@p.Surname</td>
-            <td>@p.Name</td>
-            <td>@p.Patronomic</td>
-            <td>@p.Address</td>
-            <td>@p.Email</td>
-            <td>@Html.ActionLink("Редактировать", "Edit", new { id = p.Id })</td>
-            <td>@Html.ActionLink("Удалить", "Delete", new { id = p.Id })</td>
+       
+        <tr class="qtr">
+            <td class="qrow">@p.Surname</td>
+            <td  class="nrow">@p.Name</td>
+            <td class="mrmr">@p.Patronomic</td>
+            <td  class="qrow">@p.Address</td>
+            <td  class="nrow">@p.Email</td>
+            <td  class="redbutton">@Html.ActionLink("Редактировать", "Edit", new { id = p.Id })</td>
+            <td  class="delbutton">@Html.ActionLink("Удалить", "Delete", new { id = p.Id })</td>
         </tr>
+      
     }
 </table>
+
+<style>
+    .knopka
+    {
+
+        margin-bottom:20px;
+
+    }
+
+    .txtdb
+    {
+
+        width:200px;
+        height:100px;
+        background-color: black;
+        padding:4px;
+        font-size: 20px;
+    
+ 
+        color:white;
+        text-decoration:none;
+        border-radius:4px;
+
+   
+    }
+    .txtdb:hover{
+          text-decoration:none;
+          background-color:white;
+          color:black;
+          transition:1s;
+          border:1px solid black;
+    }
+
+th{
+    padding-right: 35px;
+     padding-left: 35px;
+}
+/* границы ячеек тела таблицы */
+td {/*
+     padding: 0px 20px 0px 20px;*/
+     padding-right: 35px;
+     padding-left: 35px;
+    
+}
+
+.table-border
+{
+
+    border: 2px solid black;
+}
+
+
+.qtr:hover
+{
+     background: #fbffd9;
+
+}
+
+
+</style>
